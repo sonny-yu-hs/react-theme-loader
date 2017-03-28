@@ -119,4 +119,4 @@ var ThemeLoader = function (_React$Component) {
   return ThemeLoader;
 }(React.Component);
 
-exports.default = ThemeLoader;
+module.exports = ThemeLoader;
