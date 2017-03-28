@@ -1,6 +1,6 @@
 {
   "name": "react-theme-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Managing Less Stylesheet Themes in ReactJs",
   "main": "index.js",
   "scripts": {
