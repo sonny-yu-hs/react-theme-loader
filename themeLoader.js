@@ -13,13 +13,14 @@ class ThemeLoader extends React.Component {
 	this.state = {
 	  themeIndex: 0,
 	  themes: [],
+	  themeCookie: this.props.themeCookie || 'CURRENT_THEME'
 	};
   }
 
   importAllThemes() {
 	this.props.supportedThemes.forEach(function (theme) {
 	  // load and disable the theme stylesheet
-	  require(this.props.themeDirectory + theme + '.less');
+	  require(this.props.themeDirectory + '/' + theme + '.less');
 	  let styleSheetIndex = document.styleSheets.length - 1;
 	  document.styleSheets[styleSheetIndex].disabled = true;
 
@@ -36,7 +37,10 @@ class ThemeLoader extends React.Component {
 	}.bind(this));
 
 	// load the fonts used in the stylesheets
-	require(this.props.fontFilePath);
+	let fontFile = this.props.fonts;
+	if (fontFile) {
+      require(fontFile);
+	}
   }
 
   getThemeIndex(theme) {
@@ -56,8 +60,9 @@ class ThemeLoader extends React.Component {
 	let newThemeIndex = this.getThemeIndex(theme);
 
 	// setting the cookies for the new theme
-	Cookies.remove(this.props.themeCookie);
-	Cookies.set(this.props.themeCookie, this.state.themes[newThemeIndex].name);
+	Cookies.remove(this.state.themeCookie);
+	Cookies.set(this.state.themeCookie, this.state.themes[newThemeIndex].name);
+
 	// calculating the respective indexes of the stylesheets of new theme
 	//    and old theme among all the stylesheets loaded
 	let oldThemeStyleSheetIndex = this.state.themes[this.state.themeIndex].styleSheetIndex;
@@ -78,7 +83,7 @@ class ThemeLoader extends React.Component {
 
   componentDidMount() {
 	// setting the initial theme from cookies
-	let theme = Cookies.get(this.props.themeCookie);
+	let theme = Cookies.get(this.state.themeCookie);
 	this.setTheme(theme);
 
 	// changing the document class as "themeLoaded"
@@ -95,7 +100,7 @@ class ThemeLoader extends React.Component {
 ThemeLoader.propTypes = {
   supportedThemes: React.PropTypes.array,
   themeDirectory: React.PropTypes.string,
-  fontFilePath: React.PropTypes.string,
+  fonts: React.PropTypes.string,
   defaultTheme: React.PropTypes.string,
   themeCookie: React.PropTypes.string,
 };
