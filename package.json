@@ -1,6 +1,6 @@
 {
   "name": "react-theme-loader",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Managing Less Stylesheet Themes in ReactJs",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,10 @@
     "url": "github.com/sonny-yu-hs/react-theme-loader"
   },
   "keywords": [
-    "theme-loader"
+    "theme-loader",
+    "theme",
+    "less",
+    "react"
   ],
   "author": "sonny-yu-hs",
   "license": "UNLICENSED",
